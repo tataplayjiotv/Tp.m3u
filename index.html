@@ -1,18 +1,19 @@
-// Example function to fetch data from the API
-async function fetchM3uData(sid, id, sname, tkn) {
-    const url = `http://localhost:3000/api/getM3u?sid=${sid}&id=${id}&sname=${sname}&tkn=${tkn}`;
-    
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        console.log('API Response:', data);
-        // Handle the response and integrate it into your OTT navigation
-        // For example, update the UI or store the data in your application state
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-}
+import requests
 
-// Example usage
-fetchM3uData('tplay_A', '123456789', 'tataP', 'xeotpxyastrplg');
+# URL provided
+url = "https://gfhfgf6f2g6fdgfd.vercel.app/api/getM3u?sid=tplay_A&id=123456789&sname=tataP&tkn=xeotpxyastrplg"
+
+try:
+    # Sending a GET request to the URL
+    response = requests.get(url)
+    
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Print the response content
+        print("Data fetched successfully:")
+        print(response.text)
+    else:
+        print(f"Failed to fetch data. Status code: {response.status_code}")
+
+except Exception as e:
+    print(f"An error occurred: {e}")
