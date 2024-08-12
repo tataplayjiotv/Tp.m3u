@@ -1,17 +1,18 @@
-from flask import Flask, Response
 import requests
 
-app = Flask(__name__)
-
-M3U_URL = 'https://gfhfgf6f2g6fdgfd.vercel.app/api/getM3u?sid=tplay_A&id=123456789&sname=tataP&tkn=xeotpxyastrplg'
-
-@app.route('/playlist.m3u')
-def get_playlist():
-    response = requests.get(M3U_URL)
+def get_api_data():
+    url = 'https://gfhfgf6f2g6fdgfd.vercel.app/api/getM3u'
+    params = {
+        'sid': 'tplay_A',
+        'id': '123456789',
+        'sname': 'tataP',
+        'tkn': 'xeotpxyastrplg'
+    }
+    response = requests.get(url, params=params)
     if response.status_code == 200:
-        return Response(response.text, mimetype='application/vnd.apple.mpegurl')
+        return response.json()
     else:
-        return Response("Error fetching M3U playlist", status=500)
+        return {'error': 'Request failed'}
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+data = get_api_data()
+print(data)
